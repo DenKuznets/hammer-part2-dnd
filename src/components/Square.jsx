@@ -11,9 +11,17 @@ const SquareStyled = styled.div`
     padding: 10px;
 `;
 
-const Square = ({ className, occupied, children }) => {
-
-    return <SquareStyled className={className} style={{ backgroundColor: occupied ? 'red' : '#d9762b' }}>{children}</SquareStyled>;
+const Square = ({ id, className, occupied, children, onMouseEnter }) => {
+    return (
+        <SquareStyled
+            id={id}
+            onMouseEnter={onMouseEnter}
+            className={className}
+            style={{ backgroundColor: occupied ? "red" : "#d9762b" }}
+        >
+            {children}
+        </SquareStyled>
+    );
 };
 
 export default Square;

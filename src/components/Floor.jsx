@@ -1,30 +1,38 @@
+import useDragStore from "../store/useDragStore";
 import Square from "./Square";
 import styled from "styled-components";
 
-const floorSizeX = 3;
-const floorSizeY = 4;
+const floorRows = 4;
+const floorCols = 3;
 
 const FloorStyled = styled.div`
     height: 100vh;
     display: grid;
-    grid-template-columns: repeat(${floorSizeX}, 1fr);
+    grid-template-columns: repeat(${floorCols}, 1fr);
 `;
 
 const Floor = () => {
+    const isDragging = useDragStore((state) => state.isDragging);
+    console.log(isDragging);
     const squares = [];
-    for (let x = 1; x <= floorSizeX; x++) {
-        for (let y = 1; y <= floorSizeY; y++) {
+    for (let row = 1; row <= floorRows; row++) {
+        for (let col = 1; col <= floorCols; col++) {
             squares.push({
-                x: x,
-                y: y,
+                id: `${row}${col}`,
                 dropable: true,
                 occupied: false,
             });
         }
     }
 
+    const handleMouseEnter = (e) => {
+        // console.log(e.target.closest(".dropable"));
+    };
+
     const squaresToShow = squares.map((square, index) => (
         <Square
+            id={square.id}
+            onMouseEnter={(e) => handleMouseEnter(e)}
             className={square.dropable ? "dropable" : ""}
             occupied={square.occupied}
             key={index}

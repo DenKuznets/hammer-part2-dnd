@@ -5,7 +5,8 @@ import ItemsPool from "./components/ItemsPool";
 const Container = styled.div`
     display: flex;
     justify-content: center;
-    .items , .floor {
+    .items,
+    .floor {
         /* flex: 1; */
         flex-basis: 50%;
     }
