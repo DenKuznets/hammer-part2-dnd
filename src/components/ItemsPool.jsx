@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import useDragStore from "../store/useDragStore";
+import moveItem from "../utils/moveItem";
 
 const ItemsPoolStyled = styled.div``;
 
@@ -17,43 +18,15 @@ const Item = styled.div`
 const ItemsPool = () => {
     const startDragging = useDragStore((state) => state.startDragging);
     const stopDragging = useDragStore((state) => state.stopDragging);
+
     const handleMouseDown = (event) => {
-        const item = event.target.closest(".item");
-        console.log(item.getBoundingClientRect());
-        let shiftX = event.clientX - item.getBoundingClientRect().left;
-        let shiftY = event.clientY - item.getBoundingClientRect().top;
-
-        item.style.position = "absolute";
-        item.style.zIndex = 1000;
-        // document.body.append(item);
-
-        moveAt(event.pageX, event.pageY);
-
-        function moveAt(pageX, pageY) {
-            item.style.left = pageX - shiftX + "px";
-            item.style.top = pageY - shiftY + "px";
-        }
-
-        function onMouseMove(event) {
-            moveAt(event.pageX, event.pageY);
-        }
-
-        // передвигаем мяч при событии mousemove
-        document.addEventListener("mousemove", onMouseMove);
-
-        // отпустить мяч, удалить ненужные обработчики
-        item.onmouseup = function () {
-            document.removeEventListener("mousemove", onMouseMove);
-            item.onmouseup = null;
-        };
-
-        item.ondragstart = function () {
-            return false;
-        };
+        // moveItem(event);
     };
+
     const handleMouseUp = (e) => {
         // console.log(e, e.target);
     };
+
     const items = [
         {
             type: "chair",

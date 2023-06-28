@@ -1,0 +1,1 @@
+вычислить дропабл под курсором с помощью https://learn.javascript.ru/mouse-drag-and-drop#tseli-perenosa-droppable раздел Цели переноса (droppable) см Расширенный код onMouseMove с поиском потенциальных целей переноса:
