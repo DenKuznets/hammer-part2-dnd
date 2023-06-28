@@ -28,14 +28,14 @@ const Chair = () => {
     // console.log(preview);
     return (
         <>
-            <DragPreviewImage
+            {/* <DragPreviewImage
                 style={{
                     width: "100px !important",
                     height: "100px !important",
                 }}
                 connect={preview}
                 src={dragPreview}
-            />
+            /> */}
             <ChairStyled ref={drag} style={{ opacity: isDragging ? 0.5 : 1 }}>
                 <img src="/images/chair.png" alt="" />
             </ChairStyled>
