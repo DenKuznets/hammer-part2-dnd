@@ -1,17 +1,27 @@
-import { useState } from "react";
-import "./App.css";
-import Chair from "./components/Chair";
-import Square from "./components/Square";
+import styled from "styled-components";
 import Floor from "./components/Floor";
-import { observe } from "./components/Planner";
-import ReactDOM from "react-dom/client";
+import ItemsPool from "./components/ItemsPool";
 
-function App() {
-    // const [count, setCount] = useState(0);
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    .items , .floor {
+        /* flex: 1; */
+        flex-basis: 50%;
+    }
+`;
 
-    // return observe((chairPosition) =>
-    //     // ReactDOM.render(<Floor chairPosition={chairPosition} />)
-    // );
-}
+const App = () => {
+    return (
+        <Container>
+            <div className="items">
+                <ItemsPool />
+            </div>
+            <div className="floor">
+                <Floor />
+            </div>
+        </Container>
+    );
+};
 
 export default App;

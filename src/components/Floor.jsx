@@ -1,57 +1,39 @@
-import React from "react";
 import Square from "./Square";
-import FloorSquare from "./FloorSquare";
-import Chair from "./Chair";
 import styled from "styled-components";
-import { moveChair } from "./Planner";
-import { DndProvider, useDrag } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { ItemTypes } from "../Constants";
+
+const floorSizeX = 3;
+const floorSizeY = 4;
 
 const FloorStyled = styled.div`
-    width: 100%;
     height: 100vh;
-    /* display: flex;
-    flex-wrap: wrap; */
-    background: #d9762b;
     display: grid;
-    grid-template-columns: repeat(8, 1fr);
+    grid-template-columns: repeat(${floorSizeX}, 1fr);
 `;
 
-function renderSquare(i, chairPosition) {
-    const x = i % 8;
-    const y = Math.floor(i / 8);
-
-    return (
-        <div
-            key={i}
-            style={{
-                // width: "12.5vw",
-                height: "12.5vh",
-            }}            
-        >
-            <FloorSquare x={x} y={y}> {renderFurniture(x, y, chairPosition)} </FloorSquare>
-        </div>
-    );
-}
-
-function renderFurniture(x, y, [chairX, chairY]) {
-    if (x === chairX && y === chairY) {
-        return <Chair />;
-    }
-}
-
-const Floor = ({ chairPosition }) => {
+const Floor = () => {
     const squares = [];
-    for (let i = 0; i < 64; i++) {
-        squares.push(renderSquare(i, chairPosition));
+    for (let x = 1; x <= floorSizeX; x++) {
+        for (let y = 1; y <= floorSizeY; y++) {
+            squares.push({
+                x: x,
+                y: y,
+                dropable: true,
+                occupied: false,
+            });
+        }
     }
 
-    return (
-        <DndProvider backend={HTML5Backend}>
-            <FloorStyled>{squares}</FloorStyled>;
-        </DndProvider>
-    );
+    const squaresToShow = squares.map((square, index) => (
+        <Square
+            className={square.dropable ? "dropable" : ""}
+            occupied={square.occupied}
+            key={index}
+        />
+    ));
+
+    // console.log(squaresToShow);
+
+    return <FloorStyled>{squaresToShow}</FloorStyled>;
 };
 
 export default Floor;
