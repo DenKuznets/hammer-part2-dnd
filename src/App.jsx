@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Floor from "./components/Floor";
 import ItemsPool from "./components/ItemsPool";
 import moveItem from "./utils/moveItem";
+import useItemsStateStore from "./store/useItemsStateStore";
 
 const Container = styled.div`
     display: flex;
@@ -14,26 +15,33 @@ const Container = styled.div`
 `;
 
 const App = () => {
+    const squares = useItemsStateStore((state) => state.squares);
+    const moveItemToSquare = useItemsStateStore(
+        (state) => state.moveItemToSquare
+    );
+    const setDroppable = useItemsStateStore((state) => state.setDroppable);
+    const droppable = useItemsStateStore((state) => state.droppable);
+    let draggedItemType = null;
+
     const handleMouseDown = (event) => {
         if (event.target.closest(".item")) {
-            // console.log("dragging");
-            moveItem(event);
+            draggedItemType = event.target
+                .closest(".item")
+                .getAttribute("data-type");
+            console.log('dragged item:',draggedItemType);
+            moveItem(event, setDroppable);
         }
     };
 
     const handleMouseUp = (event) => {
-        // console.log(event.target.closest(".dropable"));
+        console.log("droppable", droppable.id);
+        
     };
-
-    const handleMouseOver = (event) => {
-        // console.log('mouse over', event.target);
-    }
 
     return (
         <Container
             onMouseDown={(e) => handleMouseDown(e)}
             onMouseUp={(e) => handleMouseUp(e)}
-            onMouseOver={(e)=> handleMouseOver(e)}
         >
             <div className="items">
                 <ItemsPool />

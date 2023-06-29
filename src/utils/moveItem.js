@@ -1,4 +1,4 @@
-const moveItem = (event) => {
+const moveItem = (event, setDroppable) => {
     const item = event.target.closest(".item");
     // потенциальная цель переноса, над которой мы пролетаем прямо сейчас
     let currentDroppable = null;
@@ -48,13 +48,13 @@ const moveItem = (event) => {
             if (currentDroppable) {
                 // логика обработки процесса "вылета" из droppable (удаляем подсветку)
                 // leaveDroppable(currentDroppable);
-                console.log("leaving droppable", currentDroppable);
+                // console.log("leaving droppable", currentDroppable);
             }
             currentDroppable = droppableBelow;
             if (currentDroppable) {
                 // логика обработки процесса, когда мы "влетаем" в элемент droppable
                 // enterDroppable(currentDroppable);
-                console.log("over droppable", currentDroppable);
+                // console.log("over droppable", currentDroppable);
             }
         }
     }
@@ -66,18 +66,23 @@ const moveItem = (event) => {
     item.onmouseup = function () {
         document.removeEventListener("mousemove", onMouseMove);
         console.log("mouse up, current droppable", currentDroppable);
-        if (currentDroppable === null) {
-            item.style.left = itemStartingPosLeft;
-            item.style.top = itemStartingPosTop;
-        } else {
-            
-        }
         item.onmouseup = null;
+        if (currentDroppable === null) {
+            // item.style.left = itemStartingPosLeft;
+            // item.style.top = itemStartingPosTop;
+            item.style.position = "static";
+            item.style.left = "unset";
+            item.style.top = "unset";
+        } else {
+            setDroppable(currentDroppable);
+        }
     };
 
     item.ondragstart = function () {
         return false;
     };
+
+    
 };
 
 export default moveItem;

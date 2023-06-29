@@ -35,6 +35,7 @@ const ItemsPool = () => {
             onMouseUp={(e) => handleMouseUp(e)}
             key={index}
             className="item"
+            data-type={item.type}
         >
             <img src={`/images/${item.img}`} />
         </Item>

@@ -28,21 +28,26 @@ const Floor = () => {
         }
     }
 
-    console.log(squares);
+    // console.log(squares);
 
     const handleMouseEnter = (e) => {
         // console.log(e.target.closest(".droppable"));
     };
 
-    const squaresToShow = squares.map((square, index) => (
-        <Square
-            id={square.id}
-            onMouseEnter={(e) => handleMouseEnter(e)}
-            className={square.droppable ? "droppable" : ""}
-            occupied={square.occupied}
-            key={index}
-        />
-    ));
+    const squaresToShow = squares.map((square, index) => {
+        // console.log(square);
+        return (
+            <Square
+                id={square.id}
+                onMouseEnter={(e) => handleMouseEnter(e)}
+                className={square.droppable ? "droppable" : ""}
+                occupied={square.occupied}
+                key={index}
+            >
+                {square.holdsItem ? <div>HOLDS ITEM</div> : ""}
+            </Square>
+        );
+    });
 
     // console.log(squaresToShow);
 
