@@ -13,27 +13,27 @@ const FloorStyled = styled.div`
 
 const Floor = () => {
     const isDragging = useDragStore((state) => state.isDragging);
-    console.log(isDragging);
+    // console.log(isDragging);
     const squares = [];
     for (let row = 1; row <= floorRows; row++) {
         for (let col = 1; col <= floorCols; col++) {
             squares.push({
                 id: `${row}${col}`,
-                dropable: true,
+                droppable: true,
                 occupied: false,
             });
         }
     }
 
     const handleMouseEnter = (e) => {
-        // console.log(e.target.closest(".dropable"));
+        // console.log(e.target.closest(".droppable"));
     };
 
     const squaresToShow = squares.map((square, index) => (
         <Square
             id={square.id}
             onMouseEnter={(e) => handleMouseEnter(e)}
-            className={square.dropable ? "dropable" : ""}
+            className={square.droppable ? "droppable" : ""}
             occupied={square.occupied}
             key={index}
         />

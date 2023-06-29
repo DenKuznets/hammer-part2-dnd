@@ -16,7 +16,7 @@ const Container = styled.div`
 const App = () => {
     const handleMouseDown = (event) => {
         if (event.target.closest(".item")) {
-            console.log("dragging");
+            // console.log("dragging");
             moveItem(event);
         }
     };
@@ -26,7 +26,7 @@ const App = () => {
     };
 
     const handleMouseOver = (event) => {
-        console.log('mouse over', event.target);
+        // console.log('mouse over', event.target);
     }
 
     return (
