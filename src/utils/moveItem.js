@@ -65,15 +65,12 @@ const moveItem = (event, setDroppable) => {
     // отпустить предмет, удалить ненужные обработчики
     item.onmouseup = function () {
         document.removeEventListener("mousemove", onMouseMove);
-        console.log("mouse up, current droppable", currentDroppable);
+        // console.log("mouse up, current droppable", currentDroppable);
         item.onmouseup = null;
-        if (currentDroppable === null) {
-            // item.style.left = itemStartingPosLeft;
-            // item.style.top = itemStartingPosTop;
-            item.style.position = "static";
-            item.style.left = "unset";
-            item.style.top = "unset";
-        } else {
+        item.style.position = "static";
+        item.style.left = "unset";
+        item.style.top = "unset";
+        if (currentDroppable !== null) {
             setDroppable(currentDroppable);
         }
     };
@@ -81,8 +78,6 @@ const moveItem = (event, setDroppable) => {
     item.ondragstart = function () {
         return false;
     };
-
-    
 };
 
 export default moveItem;

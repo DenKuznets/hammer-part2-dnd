@@ -1,3 +1,6 @@
 export const ItemTypes = {
-    CHAIR: 'chair',
-}
+    CHAIR: "chair",
+    TABLE: 'table',
+};
+
+export const ItemsList = [ItemTypes.CHAIR, ItemTypes.TABLE];

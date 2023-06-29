@@ -1,21 +1,18 @@
-import useDragStore from "../store/useDragStore";
 import useItemsStateStore from "../store/useItemsStateStore";
+import Item from "./Item";
 import Square from "./Square";
 import styled from "styled-components";
-
-const floorRows = 4;
-const floorCols = 3;
 
 const FloorStyled = styled.div`
     height: 100vh;
     display: grid;
-    grid-template-columns: repeat(${floorCols}, 1fr);
 `;
 
 const Floor = () => {
-    const isDragging = useDragStore((state) => state.isDragging);
-    const addSquare = useItemsStateStore((state) => state.addSquare);
+    const floorRows = 4;
+    const floorCols = 3;
     const squares = useItemsStateStore((state) => state.squares);
+    const addSquare = useItemsStateStore((state) => state.addSquare);
     if (squares.length === 0) {
         for (let row = 1; row <= floorRows; row++) {
             for (let col = 1; col <= floorCols; col++) {
@@ -28,30 +25,25 @@ const Floor = () => {
         }
     }
 
-    // console.log(squares);
-
-    const handleMouseEnter = (e) => {
-        // console.log(e.target.closest(".droppable"));
-    };
-
     const squaresToShow = squares.map((square, index) => {
-        // console.log(square);
         return (
             <Square
                 id={square.id}
-                onMouseEnter={(e) => handleMouseEnter(e)}
                 className={square.droppable ? "droppable" : ""}
-                occupied={square.occupied}
                 key={index}
             >
-                {square.holdsItem ? <div>HOLDS ITEM</div> : ""}
+                {square.holdsItem ? <Item itemType={square.holdsItem} /> : ""}
             </Square>
         );
     });
 
-    // console.log(squaresToShow);
-
-    return <FloorStyled>{squaresToShow}</FloorStyled>;
+    return (
+        <FloorStyled
+            style={{ gridTemplateColumns: `repeat(${floorCols}, 1fr)` }}
+        >
+            {squaresToShow}
+        </FloorStyled>
+    );
 };
 
 export default Floor;

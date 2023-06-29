@@ -15,27 +15,33 @@ const Container = styled.div`
 `;
 
 const App = () => {
-    const squares = useItemsStateStore((state) => state.squares);
     const moveItemToSquare = useItemsStateStore(
         (state) => state.moveItemToSquare
     );
-    const setDroppable = useItemsStateStore((state) => state.setDroppable);
     const droppable = useItemsStateStore((state) => state.droppable);
-    let draggedItemType = null;
+    const setDroppable = useItemsStateStore((state) => state.setDroppable);
+    const draggedItemType = useItemsStateStore(
+        (state) => state.draggedItemType
+    );
+    const setDraggedItemType = useItemsStateStore(
+        (state) => state.setDraggedItemType
+    );
 
     const handleMouseDown = (event) => {
         if (event.target.closest(".item")) {
-            draggedItemType = event.target
-                .closest(".item")
-                .getAttribute("data-type");
-            console.log('dragged item:',draggedItemType);
+            setDraggedItemType(
+                event.target.closest(".item").getAttribute("data-type")
+            );
             moveItem(event, setDroppable);
         }
     };
 
     const handleMouseUp = (event) => {
-        console.log("droppable", droppable.id);
-        
+        // console.log(droppable);
+        if (droppable) {
+            moveItemToSquare(droppable.id, draggedItemType);
+            setDroppable(null);
+        }
     };
 
     return (
