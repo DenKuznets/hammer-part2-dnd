@@ -28,16 +28,29 @@ const App = () => {
     );
 
     const handleMouseDown = (event) => {
+        event.preventDefault();
+        // console.log(event.target.closest(".item"));
         if (event.target.closest(".item")) {
+            // создать новый элемент с позицией абсолют
+            const div = document.createElement("div");
+            div.classList.add("draggedItem");
+            div.style.cssText = `
+                height: 100px;
+                width: 100px;
+                background-colod: red;
+            `;
+            document.body.appendChild(div);
+            // координаты центра элмента должны быть равны координатам курсора
             setDraggedItemType(
                 event.target.closest(".item").getAttribute("data-type")
             );
-            moveItem(event, setDroppable);
+            moveItem(event, setDroppable, div);
         }
     };
 
     const handleMouseUp = (event) => {
-        // console.log(droppable);
+        // удалить созданный предмет из документа
+
         if (droppable) {
             moveItemToSquare(droppable.id, draggedItemType);
             setDroppable(null);

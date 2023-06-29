@@ -1,5 +1,5 @@
-const moveItem = (event, setDroppable) => {
-    const item = event.target.closest(".item");
+const moveItem = (event, setDroppable, item) => {
+    // const item = event.target.closest(".item");
     // потенциальная цель переноса, над которой мы пролетаем прямо сейчас
     let currentDroppable = null;
     // console.log(item.getBoundingClientRect());
