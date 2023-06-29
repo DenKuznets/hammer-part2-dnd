@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import useDragStore from "../store/useDragStore";
-import moveItem from "../utils/moveItem";
+import useItemsStateStore from "../store/useItemsStateStore";
 
 const ItemsPoolStyled = styled.div``;
 
@@ -23,18 +23,11 @@ const ItemsPool = () => {
         // moveItem(event);
     };
 
-    const handleMouseUp = (e) => {
+    const handleMouseUp = (event) => {
         // console.log(e, e.target);
     };
 
-    const items = [
-        {
-            type: "chair",
-            img: "chair.png",
-            sizeX: 1,
-            sizeY: 1,
-        },
-    ];
+    const items = useItemsStateStore((state) => state.items)
 
     const itemsToShow = items.map((item, index) => (
         <Item
