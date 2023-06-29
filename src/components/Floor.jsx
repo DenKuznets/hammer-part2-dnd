@@ -20,7 +20,7 @@ const Floor = () => {
             squares.push({
                 id: `${row}${col}`,
                 droppable: true,
-                occupied: false,
+                holdsItem: null,
             });
         }
     }
