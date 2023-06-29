@@ -9,6 +9,13 @@ const SquareStyled = styled.div`
     /* width: 100px;
     height: 100px; */
     padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: relative; */
+    .item-holder {
+        /* position: absolute; */
+    }
 `;
 
 const Square = ({ id, className, occupied, children, onMouseEnter }) => {
@@ -19,7 +26,7 @@ const Square = ({ id, className, occupied, children, onMouseEnter }) => {
             className={className}
             style={{ backgroundColor: occupied ? "red" : "#d9762b" }}
         >
-            {children}
+            <div className="item-holder">{children}</div>
         </SquareStyled>
     );
 };
