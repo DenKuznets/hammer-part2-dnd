@@ -13,12 +13,12 @@ const ItemStyled = styled.div`
 `;
 
 const Item = ({ itemType }) => {
-    const setDraggedItemType = useItemsStateStore(
-        (state) => state.setDraggedItemType
-    );
+    const setDraggedItem = useItemsStateStore((state) => state.setDraggedItem);
+
     const handleDragStart = (e) => {
-        // console.log(e.target.closest(".item"));
-        setDraggedItemType(e.target.closest(".item").getAttribute("data-type"));
+        const item = e.target.closest(".item");
+        const square = item.closest(".droppable");        
+        setDraggedItem(square, item.getAttribute("data-type"));
     };
 
     return (

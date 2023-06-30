@@ -20,19 +20,15 @@ const SquareStyled = styled.div`
 `;
 
 const Square = ({ id, className, children }) => {
-    const moveItemToSquare = useItemsStateStore(
-        (state) => state.moveItemToSquare
-    );
-    const draggedItemType = useItemsStateStore(
-        (state) => state.draggedItemType
-    );
+    const moveItem = useItemsStateStore((state) => state.moveItem);
+    const draggedItem = useItemsStateStore((state) => state.draggedItem);
     const dragEnterOrOver = (e) => {
-        if (children || className !== "droppable") return;
+        if (className !== "droppable") return;
         e.preventDefault();
     };
 
     const handleDrop = (e) => {
-        moveItemToSquare(e.target.id, draggedItemType);
+        moveItem(e.target, draggedItem);
     };
     return (
         <SquareStyled
