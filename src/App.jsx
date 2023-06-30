@@ -3,6 +3,9 @@ import Floor from "./components/Floor";
 import ItemsPool from "./components/ItemsPool";
 import moveItem from "./utils/moveItem";
 import useItemsStateStore from "./store/useItemsStateStore";
+import Item from "./components/Item";
+import ReactDOM from "react-dom/client";
+import { createPortal } from "react-dom";
 
 const Container = styled.div`
     display: flex;
@@ -26,31 +29,29 @@ const App = () => {
     const setDraggedItemType = useItemsStateStore(
         (state) => state.setDraggedItemType
     );
+    let draggedItem;
 
     const handleMouseDown = (event) => {
         event.preventDefault();
-        // console.log(event.target.closest(".item"));
+
         if (event.target.closest(".item")) {
-            // создать новый элемент с позицией абсолют
-            const div = document.createElement("div");
-            div.classList.add("draggedItem");
-            div.style.cssText = `
-                height: 100px;
-                width: 100px;
-                background-colod: red;
-            `;
-            document.body.appendChild(div);
-            // координаты центра элмента должны быть равны координатам курсора
             setDraggedItemType(
                 event.target.closest(".item").getAttribute("data-type")
             );
-            moveItem(event, setDroppable, div);
+            draggedItem.classList.add("draggedItem");
+            draggedItem.style.cssText = `                
+                position: fixed;
+                left: ${event.clientX - 50}px;
+                top: ${event.clientY - 50}px;
+                z-index: 1000;
+                `;
+            document.body.appendChild(draggedItem);
+            moveItem(event, setDroppable, draggedItem);
         }
     };
 
     const handleMouseUp = (event) => {
-        // удалить созданный предмет из документа
-
+        console.log(droppable);
         if (droppable) {
             moveItemToSquare(droppable.id, draggedItemType);
             setDroppable(null);
