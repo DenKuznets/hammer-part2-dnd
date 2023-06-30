@@ -31,8 +31,10 @@ const Floor = () => {
                 id={square.id}
                 className={square.droppable ? "droppable" : ""}
                 key={index}
+                holdsItem={square.holdsItem}
+                // handleDrop={}
             >
-                {square.holdsItem ? <Item itemType={square.holdsItem} /> : ""}
+                {square.holdsItem && <Item itemType={square.holdsItem} />}
             </Square>
         );
     });

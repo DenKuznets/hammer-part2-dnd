@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import useItemsStateStore from "../store/useItemsStateStore";
 
 const SquareStyled = styled.div`
     /* border: 1px solid green; */
@@ -18,13 +19,30 @@ const SquareStyled = styled.div`
     }
 `;
 
-const Square = ({ id, className, occupied, children, onMouseEnter }) => {
+const Square = ({ id, className, children, holdsItem }) => {
+    const moveItemToSquare = useItemsStateStore(
+        (state) => state.moveItemToSquare
+    );
+    const draggedItemType = useItemsStateStore(
+        (state) => state.draggedItemType
+    );
+    const dragEnterOrOver = (e) => {
+        if (holdsItem) return;
+        e.preventDefault();
+    };
+
+    const handleDrop = (e) => {
+        console.log(e);
+        moveItemToSquare(e.target.id, draggedItemType);
+    };
     return (
         <SquareStyled
             id={id}
-            onMouseEnter={onMouseEnter}
+            onDragEnter={dragEnterOrOver}
+            onDragOver={dragEnterOrOver}
+            onDrop={(e) => handleDrop(e)}
             className={className}
-            style={{ backgroundColor: occupied ? "red" : "#d9762b" }}
+            style={{ backgroundColor: "#d9762b" }}
         >
             <div className="item-holder">{children}</div>
         </SquareStyled>

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import useItemsStateStore from "../store/useItemsStateStore";
 
 const ItemStyled = styled.div`
     width: 100px;
@@ -12,8 +13,21 @@ const ItemStyled = styled.div`
 `;
 
 const Item = ({ itemType }) => {
+    const setDraggedItemType = useItemsStateStore(
+        (state) => state.setDraggedItemType
+    );
+    const handleDragStart = (e) => {
+        console.log(e.target.closest(".item"));
+        setDraggedItemType(e.target.closest(".item").getAttribute("data-type"));
+    };
+
     return (
-        <ItemStyled className="item" data-type={itemType}>
+        <ItemStyled
+            onDragStart={(e) => handleDragStart(e)}
+            draggable
+            className="item"
+            data-type={itemType}
+        >
             <img src={`/images/${itemType}.png`} />
         </ItemStyled>
     );
