@@ -23,21 +23,11 @@ const useItemsStateStore = create((set) => ({
             return newState;
         }),
     removeItem: (from) =>
-        set((state) => {
-            let newState = state;
-            newState = {
-                squares: newState.squares.map((square) => {
-                    let newSquare = square;
-                    if (from.id === square.id) {
-                        newSquare = { ...square, holdsItem: null };
-                    }
-
-                    return newSquare;
-                }),
-            };
-
-            return newState;
-        }),
+        set((state) => ({
+            squares: state.squares.map((square) =>
+                from.id === square.id ? { ...square, holdsItem: null } : square
+            ),
+        })),
     draggedItem: { from: null, type: null },
     setDraggedItem: (from, type) =>
         set({ draggedItem: { from: from, type: type } }),
