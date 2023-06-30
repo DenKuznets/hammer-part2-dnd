@@ -13,13 +13,13 @@ const SquareStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    /* position: relative; */
+    position: relative;
     .item-holder {
-        /* position: absolute; */
+        position: absolute;
     }
 `;
 
-const Square = ({ id, className, children, holdsItem }) => {
+const Square = ({ id, className, children }) => {
     const moveItemToSquare = useItemsStateStore(
         (state) => state.moveItemToSquare
     );
@@ -27,12 +27,11 @@ const Square = ({ id, className, children, holdsItem }) => {
         (state) => state.draggedItemType
     );
     const dragEnterOrOver = (e) => {
-        if (holdsItem) return;
+        if (children || className !== "droppable") return;
         e.preventDefault();
     };
 
     const handleDrop = (e) => {
-        console.log(e);
         moveItemToSquare(e.target.id, draggedItemType);
     };
     return (
@@ -42,7 +41,9 @@ const Square = ({ id, className, children, holdsItem }) => {
             onDragOver={dragEnterOrOver}
             onDrop={(e) => handleDrop(e)}
             className={className}
-            style={{ backgroundColor: "#d9762b" }}
+            style={{
+                backgroundColor: className === "droppable" ? "#d9762b" : "red",
+            }}
         >
             <div className="item-holder">{children}</div>
         </SquareStyled>

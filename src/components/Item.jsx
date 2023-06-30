@@ -17,7 +17,7 @@ const Item = ({ itemType }) => {
         (state) => state.setDraggedItemType
     );
     const handleDragStart = (e) => {
-        console.log(e.target.closest(".item"));
+        // console.log(e.target.closest(".item"));
         setDraggedItemType(e.target.closest(".item").getAttribute("data-type"));
     };
 

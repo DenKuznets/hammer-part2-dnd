@@ -1,5 +1,4 @@
 import { create } from "zustand";
-import { ItemTypes } from "../utils/Constants";
 
 const useItemsStateStore = create((set) => ({
     squares: [],
@@ -14,15 +13,13 @@ const useItemsStateStore = create((set) => ({
                     if (square.id === currentSquareId) {
                         newSquare = { ...square, holdsItem: itemType };
                     }
-                    console.log("newSquare", newSquare);
+                    // console.log("newSquare", newSquare);
                     return newSquare;
                 }),
             };
 
             return newState;
         }),
-    droppable: null,
-    setDroppable: (square) => set({ droppable: square }),
     draggedItemType: null,
     setDraggedItemType: (itemType) => set({ draggedItemType: itemType }),
 }));

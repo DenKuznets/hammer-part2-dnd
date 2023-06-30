@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import useItemsStateStore from "../store/useItemsStateStore";
 import Item from "./Item";
 import { ItemsList } from "../utils/Constants";
 

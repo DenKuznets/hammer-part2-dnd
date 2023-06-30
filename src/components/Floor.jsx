@@ -18,7 +18,7 @@ const Floor = () => {
             for (let col = 1; col <= floorCols; col++) {
                 addSquare({
                     id: `${row}${col}`,
-                    droppable: true,
+                    droppable: !(row === 4),
                     holdsItem: null,
                 });
             }
@@ -31,8 +31,6 @@ const Floor = () => {
                 id={square.id}
                 className={square.droppable ? "droppable" : ""}
                 key={index}
-                holdsItem={square.holdsItem}
-                // handleDrop={}
             >
                 {square.holdsItem && <Item itemType={square.holdsItem} />}
             </Square>
