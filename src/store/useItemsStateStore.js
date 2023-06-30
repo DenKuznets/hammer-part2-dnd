@@ -7,7 +7,6 @@ const useItemsStateStore = create((set) => ({
     moveItem: (to, item) =>
         set((state) => {
             let newState = state;
-            console.log(to);
             newState = {
                 squares: newState.squares.map((square) => {
                     let newSquare = square;
@@ -15,17 +14,14 @@ const useItemsStateStore = create((set) => ({
                         newSquare = { ...square, holdsItem: null };
                     }
                     if (square.id === to.id) {
-                        console.log('adding item');
                         newSquare = { ...square, holdsItem: item.type };
                     }
-                    console.log("newSquare", newSquare);
                     return newSquare;
                 }),
             };
 
             return newState;
         }),
-    // removeItemFromSquare:
     draggedItem: { from: null, type: null },
     setDraggedItem: (from, type) =>
         set({ draggedItem: { from: from, type: type } }),

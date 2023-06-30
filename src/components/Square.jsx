@@ -28,7 +28,7 @@ const Square = ({ id, className, children }) => {
     };
 
     const handleDrop = (e) => {
-        moveItem(e.target, draggedItem);
+        moveItem(e.target.closest(".droppable"), draggedItem);
     };
     return (
         <SquareStyled
