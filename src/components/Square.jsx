@@ -17,10 +17,23 @@ const SquareStyled = styled.div`
     .item-holder {
         position: absolute;
     }
+    button {
+        position: absolute;
+        right: 0;
+        top: 0;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.3s ease;
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
 `;
 
 const Square = ({ id, className, children }) => {
     const moveItem = useItemsStateStore((state) => state.moveItem);
+    const removeItem = useItemsStateStore((state) => state.removeItem);
     const draggedItem = useItemsStateStore((state) => state.draggedItem);
     const dragEnterOrOver = (e) => {
         if (className !== "droppable") return;
@@ -42,6 +55,15 @@ const Square = ({ id, className, children }) => {
             }}
         >
             <div className="item-holder">{children}</div>
+            {children && (
+                <button
+                    onClick={(e) => {
+                        removeItem(e.target.closest(".droppable"));
+                    }}
+                >
+                    X
+                </button>
+            )}
         </SquareStyled>
     );
 };

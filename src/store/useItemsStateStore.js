@@ -13,9 +13,25 @@ const useItemsStateStore = create((set) => ({
                     if (item.from && item.from.id === square.id) {
                         newSquare = { ...square, holdsItem: null };
                     }
-                    if (square.id === to.id) {
+                    if (to && square.id === to.id) {
                         newSquare = { ...square, holdsItem: item.type };
                     }
+                    return newSquare;
+                }),
+            };
+
+            return newState;
+        }),
+    removeItem: (from) =>
+        set((state) => {
+            let newState = state;
+            newState = {
+                squares: newState.squares.map((square) => {
+                    let newSquare = square;
+                    if (from.id === square.id) {
+                        newSquare = { ...square, holdsItem: null };
+                    }
+
                     return newSquare;
                 }),
             };

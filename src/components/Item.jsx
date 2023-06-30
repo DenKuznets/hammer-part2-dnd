@@ -17,7 +17,7 @@ const Item = ({ itemType }) => {
 
     const handleDragStart = (e) => {
         const item = e.target.closest(".item");
-        const square = item.closest(".droppable");        
+        const square = item.closest(".droppable");
         setDraggedItem(square, item.getAttribute("data-type"));
     };
 
