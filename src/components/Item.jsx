@@ -17,6 +17,7 @@ const Item = ({ itemType }) => {
 
     const handleDragStart = (e) => {
         const item = e.target.closest(".item");
+        // метод setDragImage устанавливает изображение, показываемое при перетаскивании. Можно выбрать существующий элемент (иначе будет создана автоматическая версия которая может не соответстовать изначальному предмету на странице)
         e.dataTransfer.setDragImage(item, 50, 50);
         const square = item.closest(".droppable");
         setDraggedItem(square, item.getAttribute("data-type"));
