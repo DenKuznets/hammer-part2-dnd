@@ -6,10 +6,16 @@ import useItemsStateStore from "./store/useItemsStateStore";
 const Container = styled.div`
     display: flex;
     justify-content: center;
-    .items,
+    .left-side,
     .floor {
         /* flex: 1; */
         flex-basis: 50%;
+    }
+    .description {
+        background: #fff;
+    }
+    .left-side{
+        padding-right: 20px;
     }
 `;
 
@@ -51,8 +57,19 @@ const App = () => {
                 <button onClick={loadFromFile}>Загрузить из файла</button>
             </header>
             <Container>
-                <div className="items">
-                    <ItemsPool />
+                <div className="left-side">
+                    <div className="items">
+                        <ItemsPool />
+                    </div>
+                    <div className="description">
+                        Простой драг н дроп на реакте. <br />
+                        Картинки с предметами мебели можно перетаскивать вправо
+                        на оранжевые элементы пола. <br /> Красные элементы пола
+                        означают занятые места, на них перетаскивать нельзя.{" "}
+                        <br /> Кнопка сохранить в файл - сохраняет текущее
+                        расположение мебели. <br /> Кнопка загрузить -
+                        восстанавливает сохраненное расположение мебели.
+                    </div>
                 </div>
                 <div className="floor">
                     <Floor />

@@ -4,7 +4,7 @@ import Square from "./Square";
 import styled from "styled-components";
 
 const FloorStyled = styled.div`
-    height: 100vh;
+    height: 90vh;
     display: grid;
 `;
 
