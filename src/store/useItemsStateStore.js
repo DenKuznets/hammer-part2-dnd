@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 const useItemsStateStore = create((set) => ({
     squares: [],
+    loadSquares: (newSquares) => set(() => ({ squares: newSquares })),
     addSquare: (square) =>
         set((state) => ({ squares: [...state.squares, square] })),
     moveItem: (to, item) =>
