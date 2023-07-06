@@ -34,12 +34,20 @@ const appSlice = createSlice({
             }
         },
         removeItem: (state, { payload }) => {
-            const square = state.squares.find((square) => square.id === payload);
+            const square = state.squares.find(
+                (square) => square.id === payload
+            );
             square.holdsItem = null;
+        },
+        setDraggedItem: (state, { payload: { squareId, itemType } }) => {
+            state.draggedItem = {
+                from: squareId,
+                type: itemType,
+            };
         },
     },
 });
 
-export const { moveItem, removeItem } = appSlice.actions;
+export const { moveItem, removeItem, setDraggedItem } = appSlice.actions;
 
 export default appSlice.reducer;

@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import useItemsStateStore from "../store/useItemsStateStore";
+import { setDraggedItem as setDraggedItemRedux } from "../features/appSlice";
+import { useDispatch } from "react-redux";
 
 const ItemStyled = styled.div`
     width: 100px;
@@ -14,7 +16,7 @@ const ItemStyled = styled.div`
 
 const Item = ({ itemType }) => {
     const setDraggedItem = useItemsStateStore((state) => state.setDraggedItem);
-
+    const dispatch = useDispatch();
     const handleDragStart = (e) => {
         const item = e.target.closest(".item");
         // метод setDragImage устанавливает изображение, показываемое при перетаскивании. Можно выбрать существующий элемент (иначе будет создана автоматическая версия которая может не соответстовать изначальному предмету на странице)
@@ -23,6 +25,12 @@ const Item = ({ itemType }) => {
         setDraggedItem(
             square ? square.id : null,
             item.getAttribute("data-type")
+        );
+        dispatch(
+            setDraggedItemRedux({
+                squareId: square ? square.id : null,
+                itemType: item.getAttribute("data-type"),
+            })
         );
     };
 
