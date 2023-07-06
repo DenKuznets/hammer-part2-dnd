@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import useItemsStateStore from "../store/useItemsStateStore";
-import { moveItem as moveItemRedux } from "../features/appSlice";
+import {
+    moveItem as moveItemRedux,
+    removeItem as removeItemRedux,
+} from "../features/appSlice";
 import { useDispatch } from "react-redux";
 
 const SquareStyled = styled.div`
@@ -23,8 +26,9 @@ const SquareStyled = styled.div`
         cursor: pointer;
         border-radius: 4px;
         transition: all 0.3s ease;
+        opacity: 0.5;
         &:hover {
-            transform: scale(1.1);
+            opacity: 1;
         }
     }
 `;
@@ -63,7 +67,10 @@ const Square = ({ id, className, children }) => {
             {children && (
                 <button
                     onClick={(e) => {
-                        removeItem(e.target.closest(".droppable"));
+                        removeItem(e.target.closest(".droppable").id);
+                        dispatch(
+                            removeItemRedux(e.target.closest(".droppable").id)
+                        );
                     }}
                 >
                     X

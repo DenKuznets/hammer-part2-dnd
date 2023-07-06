@@ -25,7 +25,7 @@ const appSlice = createSlice({
                 (square) => square.id === toSquareId
             );
             toSquare.holdsItem = draggedItem.type;
-            
+
             if (draggedItem.fromSquareId) {
                 const fromSquare = state.squares.find(
                     (square) => square.id === draggedItem.fromSquareId
@@ -33,9 +33,13 @@ const appSlice = createSlice({
                 fromSquare.holdsItem = null;
             }
         },
+        removeItem: (state, { payload }) => {
+            const square = state.squares.find((square) => square.id === payload);
+            square.holdsItem = null;
+        },
     },
 });
 
-export const { moveItem } = appSlice.actions;
+export const { moveItem, removeItem } = appSlice.actions;
 
 export default appSlice.reducer;
