@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import useItemsStateStore from "../store/useItemsStateStore";
+import { moveItem as moveItemRedux } from "../features/appSlice";
+import { useDispatch } from "react-redux";
 
 const SquareStyled = styled.div`
     outline: 1px solid green;
@@ -29,6 +31,7 @@ const SquareStyled = styled.div`
 
 const Square = ({ id, className, children }) => {
     const moveItem = useItemsStateStore((state) => state.moveItem);
+    const dispatch = useDispatch();
     const removeItem = useItemsStateStore((state) => state.removeItem);
     const draggedItem = useItemsStateStore((state) => state.draggedItem);
     const dragEnterOrOver = (e) => {
@@ -38,6 +41,12 @@ const Square = ({ id, className, children }) => {
 
     const handleDrop = (e) => {
         moveItem(e.target.closest(".droppable"), draggedItem);
+        dispatch(
+            moveItemRedux({
+                toSquareId: e.target.closest(".droppable").id,
+                draggedItem: draggedItem,
+            })
+        );
     };
     return (
         <SquareStyled

@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Floor from "./components/Floor";
 import ItemsPool from "./components/ItemsPool";
 import useItemsStateStore from "./store/useItemsStateStore";
+import { Provider } from "react-redux";
+import { store } from "./app/store";
 
 const Container = styled.div`
     display: flex;
@@ -51,7 +53,7 @@ const App = () => {
     }
 
     return (
-        <>
+        <Provider store={store}>
             <header>
                 <button onClick={saveToFile}>Сохранить в файл</button>
                 <button onClick={loadFromFile}>Загрузить из файла</button>
@@ -75,7 +77,7 @@ const App = () => {
                     <Floor />
                 </div>
             </Container>
-        </>
+        </Provider>
     );
 };
 
