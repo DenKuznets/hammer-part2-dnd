@@ -9,9 +9,9 @@ const FloorStyled = styled.div`
 `;
 
 const Floor = () => {
-    const squaresRedux = useSelector((store) => store.app.squares);    
+    const squares = useSelector((store) => store.app.squares);    
 
-    const squaresToShow = squaresRedux.map((square, index) => {
+    const squaresToShow = squares.map((square, index) => {
         return (
             <Square
                 id={square.id}
