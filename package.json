@@ -16,8 +16,7 @@
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
-    "styled-components": "^5.3.11",
-    "zustand": "^4.3.8"
+    "styled-components": "^5.3.11"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",
