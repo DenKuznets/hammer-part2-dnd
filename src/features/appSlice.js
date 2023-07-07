@@ -47,9 +47,13 @@ const appSlice = createSlice({
                   }
                 : null;
         },
+        loadSquares: (state, { payload }) => {
+            state.squares = payload;
+        },
     },
 });
 
-export const { moveItem, removeItem, setDraggedItem } = appSlice.actions;
+export const { moveItem, removeItem, setDraggedItem, loadSquares } =
+    appSlice.actions;
 
 export default appSlice.reducer;

@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import Floor from "./components/Floor";
 import ItemsPool from "./components/ItemsPool";
-import useItemsStateStore from "./store/useItemsStateStore";
-import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { useDispatch, useSelector } from "react-redux";
+import { loadSquares as loadSquaresRedux } from "./features/appSlice";
 
 const Container = styled.div`
     display: flex;
@@ -16,14 +15,15 @@ const Container = styled.div`
     .description {
         background: #fff;
     }
-    .left-side{
+    .left-side {
         padding-right: 20px;
     }
 `;
 
 const App = () => {
-    const squares = useItemsStateStore((state) => state.squares);
-    const loadSquares = useItemsStateStore((state) => state.loadSquares);
+    const squares = useSelector((state) => state.app.squares);
+    const dispatch = useDispatch();
+
     function saveToFile() {
         let json = JSON.stringify(squares);
         const file = new Blob([json], { type: "text/plain" });
@@ -46,14 +46,15 @@ const App = () => {
             reader.onload = (readerEvent) => {
                 let content = readerEvent.target.result;
                 let loadedSquares = JSON.parse(content);
-                loadSquares(loadedSquares);
+                // loadSquares(loadedSquares);
+                dispatch(loadSquaresRedux(loadedSquares));
             };
         };
         input.click();
     }
 
     return (
-        <Provider store={store}>
+        <>
             <header>
                 <button onClick={saveToFile}>Сохранить в файл</button>
                 <button onClick={loadFromFile}>Загрузить из файла</button>
@@ -77,7 +78,7 @@ const App = () => {
                     <Floor />
                 </div>
             </Container>
-        </Provider>
+        </>
     );
 };
 
