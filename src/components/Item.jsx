@@ -22,10 +22,10 @@ const Item = ({ itemType }) => {
         // метод setDragImage устанавливает изображение, показываемое при перетаскивании. Можно выбрать существующий элемент (иначе будет создана автоматическая версия которая может не соответстовать изначальному предмету на странице)
         e.dataTransfer.setDragImage(item, 50, 50);
         const square = item.closest(".droppable");
-        setDraggedItem(
-            square ? square.id : null,
-            item.getAttribute("data-type")
-        );
+        // setDraggedItem(
+        //     square ? square.id : null,
+        //     item.getAttribute("data-type")
+        // );
         dispatch(
             setDraggedItemRedux({
                 squareId: square ? square.id : null,

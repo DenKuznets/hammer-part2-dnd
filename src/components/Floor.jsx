@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import useItemsStateStore from "../store/useItemsStateStore";
 import Item from "./Item";
 import Square from "./Square";
 import styled from "styled-components";
@@ -10,9 +9,7 @@ const FloorStyled = styled.div`
 `;
 
 const Floor = () => {
-    const squaresRedux = useSelector((store) => store.app.squares);
-    // console.log(squaresRedux);
-    
+    const squaresRedux = useSelector((store) => store.app.squares);    
 
     const squaresToShow = squaresRedux.map((square, index) => {
         return (

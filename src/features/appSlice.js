@@ -41,7 +41,7 @@ const appSlice = createSlice({
         },
         setDraggedItem: (state, { payload: { squareId, itemType } }) => {
             state.draggedItem = {
-                from: squareId,
+                fromSquareId: squareId,
                 type: itemType,
             };
         },
