@@ -14,6 +14,7 @@ const Container = styled.div`
     }
     .description {
         background: #fff;
+        padding: 10px;
     }
     .left-side {
         padding-right: 20px;
