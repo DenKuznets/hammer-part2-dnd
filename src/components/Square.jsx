@@ -11,6 +11,9 @@ const SquareStyled = styled.div`
     justify-content: center;
     align-items: center;
     position: relative;
+    @media only screen and (max-width: 460px) {
+        height: 120px;
+    }
     .item-holder {
         position: absolute;
     }
@@ -61,9 +64,7 @@ const Square = ({ id, className, children }) => {
             {children && (
                 <button
                     onClick={(e) => {
-                        dispatch(
-                            removeItem(e.target.closest(".droppable").id)
-                        );
+                        dispatch(removeItem(e.target.closest(".droppable").id));
                     }}
                 >
                     X
