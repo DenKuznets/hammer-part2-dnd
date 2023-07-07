@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { setDraggedItem as setDraggedItemRedux } from "../features/appSlice";
+import { setDraggedItem } from "../features/appSlice";
 import { useDispatch } from "react-redux";
 
 const ItemStyled = styled.div`
@@ -21,7 +21,7 @@ const Item = ({ itemType }) => {
         e.dataTransfer.setDragImage(item, 50, 50);
         const square = item.closest(".droppable");
         dispatch(
-            setDraggedItemRedux({
+            setDraggedItem({
                 squareId: square ? square.id : null,
                 itemType: item.getAttribute("data-type"),
             })
