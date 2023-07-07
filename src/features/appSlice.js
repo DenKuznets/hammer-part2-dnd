@@ -39,11 +39,13 @@ const appSlice = createSlice({
             );
             square.holdsItem = null;
         },
-        setDraggedItem: (state, { payload: { squareId, itemType } }) => {
-            state.draggedItem = {
-                fromSquareId: squareId,
-                type: itemType,
-            };
+        setDraggedItem: (state, { payload }) => {
+            state.draggedItem = payload
+                ? {
+                      fromSquareId: payload.squareId,
+                      type: payload.itemType,
+                  }
+                : null;
         },
     },
 });
