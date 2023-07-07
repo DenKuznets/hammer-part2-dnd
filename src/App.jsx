@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Floor from "./components/Floor";
 import ItemsPool from "./components/ItemsPool";
 import { useDispatch, useSelector } from "react-redux";
-import { loadSquares as loadSquaresRedux } from "./features/appSlice";
+import { loadSquares } from "./features/appSlice";
 
 const Container = styled.div`
     display: flex;
@@ -46,8 +46,7 @@ const App = () => {
             reader.onload = (readerEvent) => {
                 let content = readerEvent.target.result;
                 let loadedSquares = JSON.parse(content);
-                // loadSquares(loadedSquares);
-                dispatch(loadSquaresRedux(loadedSquares));
+                dispatch(loadSquares(loadedSquares));
             };
         };
         input.click();
