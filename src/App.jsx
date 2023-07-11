@@ -3,6 +3,8 @@ import Floor from "./components/Floor";
 import ItemsPool from "./components/ItemsPool";
 import { useDispatch, useSelector } from "react-redux";
 import { loadSquares } from "./features/appSlice";
+import "@fontsource/public-sans";
+import { Alert, Button, ButtonGroup } from "@mui/joy";
 
 const Container = styled.div`
     display: flex;
@@ -56,15 +58,17 @@ const App = () => {
     return (
         <>
             <header>
-                <button onClick={saveToFile}>Сохранить в файл</button>
-                <button onClick={loadFromFile}>Загрузить из файла</button>
+                <ButtonGroup color="info" variant="solid">
+                    <Button onClick={saveToFile}>Сохранить в файл</Button>
+                    <Button onClick={loadFromFile}>Загрузить из файла</Button>
+                </ButtonGroup>
             </header>
             <Container>
                 <div className="left-side">
                     <div className="items">
                         <ItemsPool />
                     </div>
-                    <div className="description">
+                    <Alert>
                         Простой драг н дроп на реакте. <br />
                         Картинки с предметами мебели можно перетаскивать вправо
                         на оранжевые элементы пола. <br /> Красные элементы пола
@@ -72,7 +76,7 @@ const App = () => {
                         <br /> Кнопка сохранить в файл - сохраняет текущее
                         расположение мебели. <br /> Кнопка загрузить -
                         восстанавливает сохраненное расположение мебели.
-                    </div>
+                    </Alert>
                 </div>
                 <div className="floor">
                     <Floor />
