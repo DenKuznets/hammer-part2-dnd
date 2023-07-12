@@ -6,6 +6,12 @@ import { loadSquares } from "./features/appSlice";
 import "@fontsource/public-sans";
 import { Alert, Button, ButtonGroup } from "@mui/joy";
 
+const Header = styled.header`
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+`;
+
 const Container = styled.div`
     display: flex;
     justify-content: center;
@@ -57,25 +63,21 @@ const App = () => {
 
     return (
         <>
-            <header>
+            <Header>
                 <ButtonGroup color="info" variant="solid">
-                    <Button onClick={saveToFile}>Сохранить в файл</Button>
-                    <Button onClick={loadFromFile}>Загрузить из файла</Button>
+                    <Button onClick={saveToFile}>Load</Button>
+                    <Button onClick={loadFromFile}>Save</Button>
                 </ButtonGroup>
-            </header>
+            </Header>
             <Container>
                 <div className="left-side">
                     <div className="items">
                         <ItemsPool />
                     </div>
                     <Alert>
-                        Простой драг н дроп на реакте. <br />
-                        Картинки с предметами мебели можно перетаскивать вправо
-                        на оранжевые элементы пола. <br /> Красные элементы пола
-                        означают занятые места, на них перетаскивать нельзя.{" "}
-                        <br /> Кнопка сохранить в файл - сохраняет текущее
-                        расположение мебели. <br /> Кнопка загрузить -
-                        восстанавливает сохраненное расположение мебели.
+                        Simple dnd with react <br />
+                        Furniture can be dragged onto orange floor tiles. <br />{" "}
+                        The red elements of the floor mean occupied places, can't drag onto them.
                     </Alert>
                 </div>
                 <div className="floor">
