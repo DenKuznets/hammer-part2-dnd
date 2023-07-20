@@ -65,8 +65,8 @@ const App = () => {
         <>
             <Header>
                 <ButtonGroup color="info" variant="solid">
-                    <Button onClick={saveToFile}>Load</Button>
-                    <Button onClick={loadFromFile}>Save</Button>
+                    <Button onClick={saveToFile}>Save</Button>
+                    <Button onClick={loadFromFile}>Load</Button>
                 </ButtonGroup>
             </Header>
             <Container>
@@ -77,7 +77,8 @@ const App = () => {
                     <Alert>
                         Simple dnd with react <br />
                         Furniture can be dragged onto orange floor tiles. <br />{" "}
-                        The red elements of the floor mean occupied places, can't drag onto them.
+                        The red elements of the floor mean occupied places,
+                        can't drag onto them.
                     </Alert>
                 </div>
                 <div className="floor">
